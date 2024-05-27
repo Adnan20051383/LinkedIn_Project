@@ -1,6 +1,7 @@
 package com.adnan.server.controllers;
 
 import com.adnan.server.dataAccess.BioDataAccess;
+import com.adnan.server.dataAccess.FollowDataAccess;
 import com.adnan.server.dataAccess.UserDataAccess;
 import com.adnan.server.models.Bio;
 import com.adnan.server.models.User;
@@ -16,9 +17,11 @@ import java.util.regex.Pattern;
 public class UserController {
     private static UserDataAccess UDA = null;
     private static BioDataAccess BDA = null;
+    private static FollowDataAccess FDA = null;
     public UserController() throws SQLException {
         UDA  = new UserDataAccess();
         BDA = new BioDataAccess();
+        FDA = new FollowDataAccess();
     }
     public String getUsers() throws SQLException, JsonProcessingException {
         ArrayList<User> users = UDA.getUsers();
@@ -49,7 +52,7 @@ public class UserController {
     public String createUser(String id, String firstName, String lastName, String additionalName, String country, String city, String email, String password, String phoneNumber) throws SQLException {
         if (!isValidEmail(email))
             return "NOT A VALID EMAIL!";
-        User user = new User(id, firstName, lastName, additionalName, "" ,"" ,   country, city, email, password, phoneNumber);
+        User user = new User(id, firstName, lastName, additionalName, "" ,"" ,   country, city, email, password, phoneNumber, FDA.countFollowers(id), FDA.countFollowings(id));
         if (UDA.userExists(id))
             UDA.updateUser(user);
         else

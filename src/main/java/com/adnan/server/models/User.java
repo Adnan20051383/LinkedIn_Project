@@ -25,8 +25,12 @@ public class User {
     private String password;
     @JsonProperty("phoneNumber")
     private String phoneNumber;
+    @JsonProperty("followers")
+    private int followers;
+    @JsonProperty("followings")
+    private int followings;
 
-    public User(String id, String firstName, String lastName, String additionalName, String profilePhoto, String backgroundPhoto, String country, String city, String email, String password, String phoneNumber) {
+    public User(String id, String firstName, String lastName, String additionalName, String profilePhoto, String backgroundPhoto, String country, String city, String email, String password, String phoneNumber, int followers, int followings) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -38,9 +42,27 @@ public class User {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.followers = followers;
+        this.followings = followings;
     }
 
     public User() {
+    }
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public int getFollowings() {
+        return followings;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
+    }
+
+    public void setFollowings(int followings) {
+        this.followings = followings;
     }
 
     public String getId() {
