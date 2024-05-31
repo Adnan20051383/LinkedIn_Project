@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FollowController {
     private static UserDataAccess UDA = null;
@@ -28,6 +27,8 @@ public class FollowController {
         if (!FDA.isFollowing(follower, followed)) {
             Follow follow = new Follow(follower, followed);
             FDA.addFollow(follow);
+            UDA.updateFollower(followed);
+            UDA.updateFollowing(follower);
             return "successful!";
         }
         else return "ALREADY FOLLOWED!!!";
@@ -41,6 +42,8 @@ public class FollowController {
         if (FDA.isFollowing(follower, followed)) {
             Follow follow = new Follow(follower, followed);
             FDA.deleteFollow(follow);
+            UDA.updateFollower(followed);
+            UDA.updateFollowing(follower);
             return "successful!";
         }
         else

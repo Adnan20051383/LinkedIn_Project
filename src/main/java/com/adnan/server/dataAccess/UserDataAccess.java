@@ -137,5 +137,19 @@ public class UserDataAccess {
 
         statement.executeUpdate();
     }
+    public void updateFollower(String followed) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE users SET followers = ? WHERE id = ?");
+        int a = FDA.countFollowers(followed);
+        statement.setInt(1, a);
+        statement.setString(2, followed);
+        statement.executeUpdate();
+    }
+    public void updateFollowing(String follower) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE users SET followings = ? WHERE id = ?");
+        int a = FDA.countFollowings(follower);
+        statement.setInt(1, a);
+        statement.setString(2, follower);
+        statement.executeUpdate();
+    }
 }
 

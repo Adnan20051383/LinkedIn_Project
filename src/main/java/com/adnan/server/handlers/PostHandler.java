@@ -15,11 +15,9 @@ public class PostHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         PostController postController = null;
-        UserController userController = null;
         LoggedInUserDataAccess LIUDA = null;
         try {
             postController = new PostController();
-            userController = new UserController();
             LIUDA = new LoggedInUserDataAccess();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,6 +46,16 @@ public class PostHandler implements HttpHandler {
                 }
                 break;
             case "POST":
+                InputStream requestBody = exchange.getRequestBody();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
+                StringBuilder body = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    body.append(line);
+                }
+                requestBody.close();
+                String newPost = body.toString();
+                JSONObject jsonObject = new JSONObject(newPost);
                 if (splittedPath.length == 3) {
                     try {
                         if(!splittedPath[2].equals(LIUDA.getUser())) {
@@ -55,18 +63,25 @@ public class PostHandler implements HttpHandler {
                             break;
                         }
                         else {
-                            InputStream requestBody = exchange.getRequestBody();
-                            BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
-                            StringBuilder body = new StringBuilder();
-                            String line;
-                            while ((line = reader.readLine()) != null) {
-                                body.append(line);
-                            }
-                            requestBody.close();
-                            String newPost = body.toString();
-                            JSONObject jsonObject = new JSONObject(newPost);
                             try {
-                                response = postController.createPost(jsonObject.getString("postId"), jsonObject.getString("posterId"), jsonObject.getString("content"));
+                                response = postController.createPost(splittedPath[2], jsonObject.getString("content"));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                else if (splittedPath.length == 4) {
+                    try {
+                        if(!splittedPath[2].equals(LIUDA.getUser())) {
+                            response = "NOT ALLOWED!!!";
+                            break;
+                        }
+                        else {
+                            try {
+                                response = postController.updatePost(splittedPath[3], splittedPath[2], jsonObject.getString("content"));
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
