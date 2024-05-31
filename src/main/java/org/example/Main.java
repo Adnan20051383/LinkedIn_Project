@@ -24,6 +24,10 @@ public class Main {
         server.createContext("/educations", new EducationHandler());
         server.createContext("/contacts", new ContactsHandler());
         server.createContext("/skills", new SkillHandler());
+        server.createContext("/follows", new FollowHandler());
+        server.createContext("/connects", new ConnectHandler());
+        server.createContext("/likes", new LikeHandler());
+        server.createContext("/comments", new CommentHandler());
         server.start();
     }
 

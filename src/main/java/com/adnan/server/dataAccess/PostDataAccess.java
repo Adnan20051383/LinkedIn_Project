@@ -23,9 +23,11 @@ public class PostDataAccess {
         statement.executeUpdate();
     }
     public void updatePost(Post post) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("UPDATE posts SET content = ? WHERE postId = ?");
+        PreparedStatement statement = connection.prepareStatement("UPDATE posts SET content = ?, likesNumber = ?, commentsNumber = ? WHERE postId = ?");
         statement.setString(1,post.getContent());
-        statement.setString(2,post.getPostId());
+        statement.setInt(2, post.getLikesNumber());
+        statement.setInt(3, post.getCommentsNumber());
+        statement.setString(4,post.getPostId());
         statement.executeUpdate();
     }
     public void deletePost(String postId) throws SQLException {
