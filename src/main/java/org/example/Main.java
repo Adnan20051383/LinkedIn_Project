@@ -20,6 +20,7 @@ public class Main {
         server.createContext("/likes", new LikeHandler());
         server.createContext("/comments", new CommentHandler());
         server.createContext("/messages", new MessageHandler());
+        server.createContext("/tags", new HashtagHandler());
         server.start();
     }
 
