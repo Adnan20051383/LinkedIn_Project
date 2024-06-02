@@ -58,12 +58,13 @@ public class CommentDataAccess {
         return posts;
     }
     public Comment getComment(String postId) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM comments where postId = ?");
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM comments WHERE postId = ?");
         statement.setString(1, postId);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             Comment comment = new Comment();
             comment.setPostId(postId);
+            comment.setPosterId(resultSet.getString("posterId"));
             comment.setContent(resultSet.getString("content"));
             comment.setCommentsNumber(resultSet.getInt("commentsNumber"));
             comment.setLikesNumber(resultSet.getInt("likesNumber"));

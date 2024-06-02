@@ -1,9 +1,6 @@
 package com.adnan.server.controllers;
 
-import com.adnan.server.dataAccess.CommentDataAccess;
-import com.adnan.server.dataAccess.LoggedInUserDataAccess;
-import com.adnan.server.dataAccess.PostDataAccess;
-import com.adnan.server.dataAccess.UserDataAccess;
+import com.adnan.server.dataAccess.*;
 import com.adnan.server.models.Comment;
 import com.adnan.server.models.Content;
 import com.adnan.server.models.Post;
@@ -85,6 +82,7 @@ public class PostController {
         if (!comment.getPosterId().equals(LIUDA.getUser()))
             return "NOT ALLOWED!!!";
         Content post;
+
         if (PDA.postExists((comment.getParentId()))) {
             post = PDA.getPost(comment.getParentId());
             post.decreaseComment();
