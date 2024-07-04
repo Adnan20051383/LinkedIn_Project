@@ -49,6 +49,7 @@ public class LikeHandler implements HttpHandler {
             case "POST":
                 if (splittedPath.length == 4) {
                     try {
+                        System.out.println(splittedPath[2] + "   " + splittedPath[3]);
                         response = likeController.addLike(splittedPath[2], splittedPath[3]);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
