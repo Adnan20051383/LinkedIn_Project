@@ -26,6 +26,7 @@ public class LikeController {
         COMDA = new CommentDataAccess();
     }
     public String addLike(String liker, String liked) throws SQLException {
+        System.out.println(liker + "    " + liked);
         if (!UDA.userExists(liker) || (!PDA.postExists(liked) && !COMDA.commentExists(liked)))
             return "USER OR POST  NOT FOUND!!";
         if (!LIUDA.getUser().equals(liker))
@@ -45,7 +46,7 @@ public class LikeController {
             COMDA.updateComment((Comment) post);
         }
         LDA.addLike(like);
-        return "successful";
+        return "successful!";
 
     }
     public String deleteLike(String liker, String liked) throws SQLException {
@@ -68,7 +69,7 @@ public class LikeController {
             COMDA.updateComment((Comment) post);
         }
         LDA.deleteLike(like);
-        return "successful";
+        return "successful!";
     }
 
 

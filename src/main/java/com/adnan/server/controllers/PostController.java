@@ -39,7 +39,7 @@ public class PostController {
             return "USER NOT FOUND!!!";
         Post post = new Post(posterId, content);
         PDA.addPost(post);
-        return "successful!";
+        return post.getPostId();
     }
     public String updatePost(String postId, String posterId, String content) throws SQLException {
         if (!PDA.postExists(postId) || !UDA.userExists(posterId))
@@ -73,7 +73,7 @@ public class PostController {
             COMDA.updateComment((Comment) post);
         }
         COMDA.addComment(comment);
-        return "successful";
+        return comment.getPostId();
     }
     public String deleteComment(String postId) throws SQLException {
         if (!COMDA.commentExists(postId))

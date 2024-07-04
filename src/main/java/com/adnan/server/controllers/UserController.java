@@ -97,5 +97,9 @@ public class UserController {
         else
             return "NO BIO FOUND!";
     }
+    public boolean userExists(String id) throws SQLException {
+        return UDA.userExists(id);
+    }
+
 
 }

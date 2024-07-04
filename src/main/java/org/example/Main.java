@@ -21,6 +21,7 @@ public class Main {
         server.createContext("/comments", new CommentHandler());
         server.createContext("/messages", new MessageHandler());
         server.createContext("/tags", new HashtagHandler());
+        server.createContext("/media", new MediaHandler());
         server.start();
     }
 

@@ -1,4 +1,4 @@
-package com.adnan.server.models;
+package org.example.linkedinclient;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
