@@ -222,12 +222,12 @@ public class FeedController {
         }
     }
 
-    private String downloadProfPostImg(String userId) {
+    public static String downloadProfPostImg(String userId) {
         if (fileExists("C:\\Users\\3500-\\Desktop\\LinkedIn Project\\LinkedInClient\\src\\main\\resources\\org\\example\\linkedinclient\\assets\\profPic" + userId + ".png"))
             return "C:\\Users\\3500-\\Desktop\\LinkedIn Project\\LinkedInClient\\src\\main\\resources\\org\\example\\linkedinclient\\assets\\profPic" + userId + ".png";
         return "C:\\Users\\3500-\\Desktop\\LinkedIn Project\\LinkedInClient\\src\\main\\resources\\org\\example\\linkedinclient\\assets\\logo.png";
     }
-    private String downloadProfImg() {
+    public static String downloadProfImg() {
         if (fileExists("C:\\Users\\3500-\\Desktop\\LinkedIn Project\\LinkedInClient\\src\\main\\resources\\org\\example\\linkedinclient\\assets\\profPic" + LoggedInUser.getId() + ".png"))
             return "C:\\Users\\3500-\\Desktop\\LinkedIn Project\\LinkedInClient\\src\\main\\resources\\org\\example\\linkedinclient\\assets\\profPic" + LoggedInUser.getId() + ".png";
         return "C:\\Users\\3500-\\Desktop\\LinkedIn Project\\LinkedInClient\\src\\main\\resources\\org\\example\\linkedinclient\\assets\\logo.png";

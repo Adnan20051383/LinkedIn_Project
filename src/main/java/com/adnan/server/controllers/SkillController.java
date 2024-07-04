@@ -22,8 +22,23 @@ public class SkillController {
         if(SDA.countSkills(userId) == 5)
             return "YOU CAN ONLY ADD 5 SKILLS!!!";
         int a = SDA.countSkills(userId);
-        Skill skill = new Skill(userId, ++a, text);
-            SDA.addSkill(skill);
+        ArrayList<Skill> skills = SDA.getSkills(userId);
+        Skill skill;
+        int x = 1;
+        if (a != 0) {
+            for (int i = 0; i < a ; i++) {
+                if (skills.get(i).getNthSkill() != x) {
+                    a = x - 1;
+                    break;
+                }
+                x++;
+            }
+            skill = new Skill(userId, ++a, text);
+        }
+        else {
+            skill = new Skill(userId, ++a, text);
+        }
+        SDA.addSkill(skill);
         return "successful";
     }
     public String getSkills(String userId) throws SQLException, JsonProcessingException {
