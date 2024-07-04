@@ -51,7 +51,18 @@ public class HelloApplication extends Application {
             case 8:
                 stg.setScene(new Scene((new FXMLLoader(HelloApplication.class.getResource("sumPage.fxml"))).load(), 600, 500));
                 break;
-
+            case 9:
+                stg.setScene(new Scene((new FXMLLoader(HelloApplication.class.getResource("skillPage.fxml"))).load(), 432, 602));
+                break;
+            case 10:
+                stg.setScene(new Scene((new FXMLLoader(HelloApplication.class.getResource("skillComponent.fxml"))).load(), 400, 300));
+                break;
+            case 11:
+                stg.setScene(new Scene((new FXMLLoader(HelloApplication.class.getResource("followersPage.fxml"))).load(), 600, 700));
+                break;
+            case 12:
+                stg.setScene(new Scene((new FXMLLoader(HelloApplication.class.getResource("followingsPage.fxml"))).load(), 600, 700));
+                break;
 
 
         }

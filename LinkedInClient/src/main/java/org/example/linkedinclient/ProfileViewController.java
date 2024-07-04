@@ -168,10 +168,14 @@ public class ProfileViewController {
         helloApplication.changeScene(1);
     }
 
-    public void OnMouseClickedShowFollowersBtn(MouseEvent mouseEvent) {
+    public void OnMouseClickedShowFollowersBtn(MouseEvent mouseEvent) throws IOException {
+        HelloApplication helloApplication = new HelloApplication();
+        helloApplication.changeScene(11);
     }
 
-    public void OnMouseClickedShowFollowingsBtn(MouseEvent mouseEvent) {
+    public void OnMouseClickedShowFollowingsBtn(MouseEvent mouseEvent) throws IOException {
+        HelloApplication helloApplication = new HelloApplication();
+        helloApplication.changeScene(12);
     }
 
     public void OnMouseClickedSumBtn(MouseEvent mouseEvent) {
@@ -181,7 +185,7 @@ public class ProfileViewController {
         HelloApplication helloApplication = new HelloApplication();
         helloApplication.changeScene(6);
     }
-    public ArrayList<User> getFollowers() throws IOException {
+    public static ArrayList<User> getFollowers() throws IOException {
         URL url = new URL("http://localhost:8000/follows/followers/" + LoggedInUser.getId());
         String response;
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -205,7 +209,7 @@ public class ProfileViewController {
         }
         return users1;
     }
-    public User getUser(String userId) throws IOException {
+    public static User getUser(String userId) throws IOException {
         String response;
         URL url = new URL("http://localhost:8000/users/" + userId);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -225,7 +229,7 @@ public class ProfileViewController {
         User user = new User(userId, obj.getString("firstName"), obj.getString("lastName"), obj.getString("additionalName"), obj.getString("country"), obj.getString("city"), obj.getString("email"), obj.getString("password"), obj.getString("phoneNumber"), obj.getInt("followers"), obj.getInt("followings"));
         return user;
     }
-    public ArrayList<User> getFollowings() throws IOException {
+    public static ArrayList<User> getFollowings() throws IOException {
         URL url = new URL("http://localhost:8000/follows/followings/" + LoggedInUser.getId());
         String response;
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -265,8 +269,8 @@ public class ProfileViewController {
         }
         in1.close();
         response = response2.toString();
-        JSONObject obj = new JSONObject(response);
-        if (!response.equals("no bio")) {
+        if (!response.equals("NO BIO!")) {
+            JSONObject obj = new JSONObject(response);
             summaryTextArea.setText(obj.getString("bioText"));
         }
         else
@@ -274,6 +278,8 @@ public class ProfileViewController {
 
 
     }
-    public void OnMouseClickedSkillBtn(MouseEvent mouseEvent) {
+    public void OnMouseClickedSkillBtn(MouseEvent mouseEvent) throws IOException {
+        HelloApplication helloApplication = new HelloApplication();
+        helloApplication.changeScene(9);
     }
 }
