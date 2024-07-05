@@ -46,7 +46,7 @@ public class LikeController {
             COMDA.updateComment((Comment) post);
         }
         LDA.addLike(like);
-        return "successful!";
+        return "successful";
 
     }
     public String deleteLike(String liker, String liked) throws SQLException {
@@ -69,7 +69,7 @@ public class LikeController {
             COMDA.updateComment((Comment) post);
         }
         LDA.deleteLike(like);
-        return "successful!";
+        return "successful";
     }
 
 
