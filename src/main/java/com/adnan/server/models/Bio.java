@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Bio {
     @JsonProperty("userId")
     private String userId;
-    @JsonProperty("biography")
+    @JsonProperty("bioText")
     private String bioText;
 
     @JsonProperty("location")

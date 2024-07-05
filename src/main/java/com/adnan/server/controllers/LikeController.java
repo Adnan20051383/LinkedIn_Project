@@ -26,6 +26,7 @@ public class LikeController {
         COMDA = new CommentDataAccess();
     }
     public String addLike(String liker, String liked) throws SQLException {
+        System.out.println(liker + "    " + liked);
         if (!UDA.userExists(liker) || (!PDA.postExists(liked) && !COMDA.commentExists(liked)))
             return "USER OR POST  NOT FOUND!!";
         if (!LIUDA.getUser().equals(liker))

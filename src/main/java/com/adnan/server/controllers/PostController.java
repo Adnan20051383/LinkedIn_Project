@@ -1,9 +1,6 @@
 package com.adnan.server.controllers;
 
-import com.adnan.server.dataAccess.CommentDataAccess;
-import com.adnan.server.dataAccess.LoggedInUserDataAccess;
-import com.adnan.server.dataAccess.PostDataAccess;
-import com.adnan.server.dataAccess.UserDataAccess;
+import com.adnan.server.dataAccess.*;
 import com.adnan.server.models.Comment;
 import com.adnan.server.models.Content;
 import com.adnan.server.models.Post;
@@ -42,7 +39,7 @@ public class PostController {
             return "USER NOT FOUND!!!";
         Post post = new Post(posterId, content);
         PDA.addPost(post);
-        return "successful!";
+        return post.getPostId();
     }
     public String updatePost(String postId, String posterId, String content) throws SQLException {
         if (!PDA.postExists(postId) || !UDA.userExists(posterId))
@@ -76,7 +73,7 @@ public class PostController {
             COMDA.updateComment((Comment) post);
         }
         COMDA.addComment(comment);
-        return "successful";
+        return comment.getPostId();
     }
     public String deleteComment(String postId) throws SQLException {
         if (!COMDA.commentExists(postId))
@@ -85,6 +82,7 @@ public class PostController {
         if (!comment.getPosterId().equals(LIUDA.getUser()))
             return "NOT ALLOWED!!!";
         Content post;
+
         if (PDA.postExists((comment.getParentId()))) {
             post = PDA.getPost(comment.getParentId());
             post.decreaseComment();

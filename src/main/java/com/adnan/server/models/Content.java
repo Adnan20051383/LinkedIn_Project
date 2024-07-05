@@ -2,6 +2,7 @@ package com.adnan.server.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Content {
@@ -17,6 +18,8 @@ public class Content {
     private Date timeStamp;
     @JsonProperty("commentsNumber")
     private int commentsNumber;
+    @JsonProperty("mediaPaths")
+    private ArrayList<String> mediaPaths;
 
     public Content(String posterId, String content) {
         this.postId = posterId + System.currentTimeMillis();
@@ -25,11 +28,13 @@ public class Content {
         this.timeStamp = new Date(System.currentTimeMillis());
         this.likesNumber = 0;
         this.commentsNumber = 0;
+        mediaPaths = new ArrayList<>();
     }
     public Content() {
         this.likesNumber = 0;
         this.commentsNumber = 0;
         this.timeStamp = new Date(System.currentTimeMillis());
+        mediaPaths = new ArrayList<>();
     }
 
     public String getPostId() {
@@ -89,5 +94,13 @@ public class Content {
     }
     public void setLikesNumber(int likesNumber) {
         this.likesNumber = likesNumber;
+    }
+
+    public ArrayList<String> getMediaPaths() {
+        return mediaPaths;
+    }
+
+    public void setMediaPaths(ArrayList<String> mediaPaths) {
+        this.mediaPaths = mediaPaths;
     }
 }

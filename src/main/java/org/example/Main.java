@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class Main {
+
     public static void main(String[] args) throws IOException, InterruptedException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
         server.createContext("/users", new UserHandler());
@@ -20,6 +21,8 @@ public class Main {
         server.createContext("/likes", new LikeHandler());
         server.createContext("/comments", new CommentHandler());
         server.createContext("/messages", new MessageHandler());
+        server.createContext("/tags", new HashtagHandler());
+        server.createContext("/media", new MediaHandler());
         server.start();
     }
 
